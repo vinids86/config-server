@@ -1,7 +1,11 @@
 server:
   port: 8888
 
-spring.cloud.config.server.git.uri: https://github.com/vinids86/microservices-config
+spring:
+  cloud.config.server.git.uri: https://github.com/vinids86/microservices-config
+  # 1.0 means 100%, see http://cloud.spring.io/spring-cloud-sleuth/spring-cloud-sleuth.html#_sampling
+  sleuth:
+    sampler.percentage: 1.0
 ---
 # For deployment in Docker containers
 spring:
