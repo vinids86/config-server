@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+spring.cloud.config.server.git.uri: https://github.com/vinids86/microservices-config
+---
+# For deployment in Docker containers
+spring:
+  profiles: docker
+
+server:
+  port: 8888
+
+security.basic.enabled: true
+
+# when running docker locally on a dev pc the config-repo is mounted to a local git-repo in docker-compose file
+#spring.cloud.config.server.git.uri: /config-repo
+
+spring.cloud.config.server.git.uri: https://github.com/vinids86/microservices-config
+
+eureka:
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
